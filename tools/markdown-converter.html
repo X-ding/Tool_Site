@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markdown 鏍煎紡杞崲 - 鍏嶈垂鍦ㄧ嚎 Markdown 宸ュ叿</title>
+<meta name="description" content="鍦ㄧ嚎 Markdown 锟?HTML銆佸瘜鏂囨湰浜掔浉杞崲锛屾敮鎸佸疄鏃堕瑙堬紝鍏嶆敞鍐屽厤璐逛娇鐢拷?>
+<meta name="keywords" content="Markdown杞崲,Markdown杞琀TML,HTML杞琈arkdown,鍦ㄧ嚎Markdown缂栬緫锟?>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="header"><div class="header-inner">
+<a href="/" class="header-logo">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+<span>鍦ㄧ嚎宸ュ叿绠?/span>
+</a>
+<nav class="header-nav">
+<a href="/">棣栭〉</a>
+<a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a>
+<a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a>
+<a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a>
+<a href="/tools/screenshot-studio.html">鎴浘缇庡寲</a>
+<a href="/">鍏ㄩ儴宸ュ叿</a>
+</nav>
+</div></header>
+
+<main class="tool-page">
+  <div class="container">
+    <div class="tool-page-header">
+      <a href="/" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        杩斿洖棣栭〉
+      </a>
+      <h1>Markdown 鏍煎紡杞崲</h1>
+      <p>Markdown 锟?HTML 浜掔浉杞崲锛屾敮鎸佸疄鏃堕瑙堬拷?/p>
+    </div>
+
+    <div class="tool-body">
+      <div class="form-group">
+        <label>杞崲鏂瑰悜</label>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-primary" id="dirMdToHtml" onclick="setDirection('md2html')">Markdown 锟?HTML</button>
+          <button class="btn btn-outline" id="dirHtmlToMd" onclick="setDirection('html2md')">HTML 锟?Markdown</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label id="inputLabel">杈撳叆 Markdown</label>
+        <textarea id="inputMd" placeholder="鍦ㄦ绮樿创 Markdown 锟?HTML..." style="min-height:220px;font-family:var(--font)"># 鏍囬绀轰緥&#10;&#10;杩欐槸涓€锟?**绮椾綋** 锟?*鏂滀綋* 鏂囨湰锟?#10;&#10;- 鍒楄〃锟?1&#10;- 鍒楄〃锟?2&#10;</textarea>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="convert()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/></svg>
+          杞崲
+        </button>
+      </div>
+
+      <div class="output-area" id="outputArea" style="display:none">
+        <div class="output-label">杞崲缁撴灉</div>
+        <div class="output-content" id="convertOutput"></div>
+        <div class="btn-group">
+          <button class="copy-btn" data-target="convertOutput">澶嶅埗缁撴灉</button>
+          <button class="btn btn-outline" onclick="togglePreview()" id="previewBtn">棰勮鏁堟灉</button>
+        </div>
+        <div id="previewArea" style="display:none;margin-top:12px;padding:16px;background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm)"></div>
+      </div>
+    </div>
+
+    <div class="ad-placeholder">骞垮憡浣嶆嫑锟?路 鑱旂郴鍚堜綔</div>
+  </div>
+</main>
+
+<footer class="footer"><div class="container">
+<div class="footer-grid">
+<div class="footer-col"><h4>鉁?鍦ㄧ嚎宸ュ叿绠?/h4><p>鍏嶈垂鍦ㄧ嚎宸ュ叿鍚堥泦锛屽寘鍚皝闈㈣璁°€佸崱鐗囧埗浣溿€佸紑鍙戣皟璇曘€佹晥鐜囨彁鍗囩瓑澶氱宸ュ叿锛屾祻瑙堝櫒绔鐞嗭紝鏃犻渶娉ㄥ唽锛屽嵆寮€鍗崇敤銆?/p></div>
+<div class="footer-col"><h4>鍐呭鍒涗綔</h4><a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a><a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a><a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a><a href="/tools/screenshot-studio.html">鎴浘缇庡寲鍣?/a></div>
+<div class="footer-col"><h4>寮€鍙戝伐鍏?/h4><a href="/tools/json-formatter.html">JSON 鏍煎紡鍖?/a><a href="/tools/markdown-converter.html">Markdown 杞崲</a></div>
+<div class="footer-col"><h4>鏁堢巼宸ュ叿</h4><a href="/tools/weekly-report.html">鍛ㄦ姤鐢熸垚鍣?/a><a href="/tools/email-template.html">閭欢妯℃澘</a><a href="/tools/pomodoro.html">鐣寗閽?/a><a href="/tools/todo-manager.html">寰呭姙浜嬮」</a></div>
+</div>
+<div class="footer-bottom"><p>鍦ㄧ嚎宸ュ叿绠?路 鍏嶈垂鍦ㄧ嚎宸ュ叿 路 鏁版嵁鏈湴澶勭悊 路 鏃犻渶娉ㄥ唽</p></div>
+</div></footer>
+
+<script src="/js/main.js"></script>
+<script>
+let direction = 'md2html';
+let lastResult = '';
+
+function setDirection(dir) {
+  direction = dir;
+  const mdBtn = document.getElementById('dirMdToHtml');
+  const htmlBtn = document.getElementById('dirHtmlToMd');
+  const label = document.getElementById('inputLabel');
+  if (dir === 'md2html') {
+    mdBtn.className = 'btn btn-primary';
+    htmlBtn.className = 'btn btn-outline';
+    label.textContent = '杈撳叆 Markdown';
+    document.getElementById('inputMd').placeholder = '鍦ㄦ绮樿创 Markdown...';
+  } else {
+    mdBtn.className = 'btn btn-outline';
+    htmlBtn.className = 'btn btn-primary';
+    label.textContent = '杈撳叆 HTML';
+    document.getElementById('inputMd').placeholder = '鍦ㄦ绮樿创 HTML...';
+  }
+  document.getElementById('outputArea').style.display = 'none';
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function mdToHtml(md) {
+  let html = md;
+  // Headers
+  html = html.replace(/^###### (.+)$/gm, '<h6>$1</h6>');
+  html = html.replace(/^##### (.+)$/gm, '<h5>$1</h5>');
+  html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+  // Bold & Italic
+  html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  // Inline code
+  html = html.replace(/`(.+?)`/g, '<code>$1</code>');
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+  // Unordered list
+  html = html.replace(/^[\s]*[-*+]\s+(.+)$/gm, '<li>$1</li>');
+  html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+  // Ordered list
+  html = html.replace(/^[\s]*\d+\.\s+(.+)$/gm, '<li>$1</li>');
+  // Paragraphs
+  html = html.replace(/\n\n/g, '</p><p>');
+  html = '<p>' + html + '</p>';
+  // Cleanup empty paragraphs
+  html = html.replace(/<p><\/p>/g, '');
+  // Code block
+  html = html.replace(/```(\w*)\n?([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+  return html;
+}
+
+function htmlToMd(html) {
+  let md = html;
+  // Headers
+  md = md.replace(/<h1[^>]*>/gi, '# ').replace(/<\/h1>/gi, '\n\n');
+  md = md.replace(/<h2[^>]*>/gi, '## ').replace(/<\/h2>/gi, '\n\n');
+  md = md.replace(/<h3[^>]*>/gi, '### ').replace(/<\/h3>/gi, '\n\n');
+  md = md.replace(/<h4[^>]*>/gi, '#### ').replace(/<\/h4>/gi, '\n\n');
+  md = md.replace(/<h5[^>]*>/gi, '##### ').replace(/<\/h5>/gi, '\n\n');
+  md = md.replace(/<h6[^>]*>/gi, '###### ').replace(/<\/h6>/gi, '\n\n');
+  // Bold & Italic
+  md = md.replace(/<strong>\s*(.*?)\s*<\/strong>/gi, '**$1**');
+  md = md.replace(/<em>\s*(.*?)\s*<\/em>/gi, '*$1*');
+  // Code
+  md = md.replace(/<code>(.*?)<\/code>/gi, '`$1`');
+  // Pre
+  md = md.replace(/<pre><code>([\s\S]*?)<\/code><\/pre>/gi, '```\n$1\n```');
+  // Links
+  md = md.replace(/<a[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '[$2]($1)');
+  // Lists
+  md = md.replace(/<li>(.*?)<\/li>/gi, '- $1\n');
+  md = md.replace(/<ul[\s\S]*?>/gi, '').replace(/<\/ul>/gi, '');
+  md = md.replace(/<ol[\s\S]*?>/gi, '').replace(/<\/ol>/gi, '');
+  // Paragraphs
+  md = md.replace(/<p[^>]*>/gi, '').replace(/<\/p>/gi, '\n\n');
+  // Br
+  md = md.replace(/<br\s*\/?>/gi, '\n');
+  // Remove remaining tags
+  md = md.replace(/<[^>]+>/g, '');
+  // Cleanup extra whitespace
+  md = md.replace(/\n{3,}/g, '\n\n').trim();
+  return md;
+}
+
+function convert() {
+  const input = document.getElementById('inputMd').value;
+  if (!input.trim()) { alert('璇疯緭鍏ュ唴锟?); return; }
+
+  let result;
+  if (direction === 'md2html') {
+    result = mdToHtml(input);
+  } else {
+    result = htmlToMd(input);
+  }
+
+  lastResult = result;
+  const out = document.getElementById('convertOutput');
+  out.textContent = result;
+  document.getElementById('outputArea').style.display = 'block';
+  document.getElementById('previewArea').style.display = 'none';
+  document.getElementById('previewBtn').textContent = '棰勮鏁堟灉';
+}
+
+function togglePreview() {
+  const preview = document.getElementById('previewArea');
+  const btn = document.getElementById('previewBtn');
+  if (preview.style.display === 'none') {
+    preview.style.display = 'block';
+    btn.textContent = '闅愯棌棰勮';
+    if (direction === 'md2html') {
+      preview.innerHTML = lastResult;
+    } else {
+      preview.innerHTML = mdToHtml(lastResult);
+    }
+  } else {
+    preview.style.display = 'none';
+    btn.textContent = '棰勮鏁堟灉';
+  }
+}
+</script>
+<script src="/js/animations.js"></script></body>
+</html>
+

@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>鎷煎浘宸ュ潑 - 鍏嶈垂鍦ㄧ嚎澶氬浘鎷艰创宸ュ叿</title>
+<meta name="description" content="鍦ㄧ嚎灏嗗寮犵収鐗囨嫾鎴愪竴寮犲浘锛屾敮锟?-4寮犲浘鐗囥€佸绉嶅竷灞€锛屼竴閿笅杞介珮娓匬NG锟?>
+<meta name="keywords" content="鎷煎浘宸ュ叿,鍥剧墖鎷兼帴,澶氬浘鎷艰创,鐓х墖鎷煎浘,灏忕孩涔︽嫾锟?>
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.studio-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+.preview-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;position:sticky;top:80px}
+.preview-panel canvas{max-width:100%;height:auto;border-radius:6px;box-shadow:var(--shadow-lg);margin:0 auto;display:block}
+.settings-panel .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px}
+.settings-panel .card h3{font-size:.8125rem;font-weight:600;color:var(--text-muted);letter-spacing:.04em;margin-bottom:12px}
+.layout-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.layout-grid button{padding:10px 4px;border:2px solid var(--border);border-radius:var(--radius-sm);background:#fff;cursor:pointer;font-size:.75rem;font-family:var(--font)}
+.layout-grid button:hover{border-color:var(--primary)}
+.layout-grid button.active{border-color:var(--primary);background:var(--primary-50)}
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius-sm);padding:24px;text-align:center;cursor:pointer}
+.upload-zone:hover{border-color:var(--primary);background:var(--primary-50)}
+.upload-zone.has-images{border-style:solid;border-color:var(--success);background:var(--success-light)}
+.upload-zone input{display:none}
+.thumb-list{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.thumb-list img{width:56px;height:56px;border-radius:6px;object-fit:cover;border:2px solid var(--border);cursor:pointer}
+.thumb-list img:hover{border-color:var(--danger)}
+.gap-row{display:flex;align-items:center;gap:10px}
+.gap-row input[type=range]{flex:1}
+.gap-row .val{font-weight:700;color:var(--primary);min-width:24px;text-align:center}
+@media(max-width:860px){.studio-layout{grid-template-columns:1fr}.preview-panel{position:static}}
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner">
+<a href="/" class="header-logo">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+<span>鍦ㄧ嚎宸ュ叿绠?/span>
+</a>
+<nav class="header-nav">
+<a href="/">棣栭〉</a>
+<a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a>
+<a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a>
+<a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a>
+<a href="/tools/screenshot-studio.html">鎴浘缇庡寲</a>
+<a href="/">鍏ㄩ儴宸ュ叿</a>
+</nav>
+</div></header>
+<main class="tool-page"><div class="container"><div class="tool-page-header"><a href="/" class="back-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>杩斿洖棣栭〉</a><h1>鎷煎浘宸ュ潑</h1><p>鎶婂寮犵収鐗囨嫾鎴愪竴寮犲浘锛岄€傜敤浜庢帰搴楀悎闆嗐€佺┛鎼睍绀恒€佸墠鍚庡姣旂瓑鍦烘櫙锟?/p></div><div class="studio-layout"><div class="preview-panel"><canvas id="previewCanvas" width="540" height="540"></canvas><div class="size-tip">1080 x 1080 | 1:1 姝ｆ柟锟?/div><button class="btn btn-primary btn-download" onclick="downloadCollage()" style="width:100%;padding:14px;font-size:1rem;border-radius:var(--radius);justify-content:center;margin-top:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>涓嬭浇鎷煎浘</button></div><div class="settings-panel"><div class="card"><h3>涓婁紶鍥剧墖</h3><div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="margin-bottom:8px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div style="font-size:.875rem;color:var(--text-muted)">鐐瑰嚮涓婁紶鍥剧墖锛堟渶锟?寮狅級</div><input type="file" id="fileInput" accept="image/*" multiple onchange="handleFiles(this.files)"></div><div class="thumb-list" id="thumbList"></div><div id="uploadCount" style="font-size:.8125rem;color:var(--text-muted);margin-top:6px">宸蹭笂锟?0 锟?/div></div><div class="card"><h3>鎷煎浘甯冨眬</h3><div class="layout-grid" id="layoutGrid"></div></div><div class="card"><h3>蹇嵎鎿嶄綔</h3><div style="display:flex;gap:8px"><button class="btn btn-outline" onclick="generateDemo()" style="font-size:.75rem;padding:6px 12px;flex:1;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 鐢熸垚绀轰緥</button><button class="btn btn-outline" onclick="reverseOrder()" style="font-size:.75rem;padding:6px 12px;flex:1;justify-content:center">棰犲€掗『锟?/button>
+          <button class="btn btn-outline" onclick="clearAll()" style="font-size:.75rem;padding:6px 12px;flex:1;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> 娓呯┖</button></div></div>
+
+        <div class="card"><h3>闂磋窛涓庤儗锟?/h3><div class="form-group"><label>鍥剧墖闂磋窛</label><div class="gap-row"><input type="range" id="gapSlider" min="0" max="40" value="8" oninput="updateGap()"><span class="val" id="gapVal">8</span><span style="font-size:.8125rem;color:var(--text-muted)">px</span></div></div><div class="color-group" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><label style="font-size:.8125rem;color:var(--text-secondary)">鑳屾櫙锟?/label><input type="color" id="bgColor" value="#f8fafc" oninput="scheduleRender()" style="width:32px;height:32px;border:2px solid var(--border);border-radius:6px;cursor:pointer;padding:0;background:none"></div></div></div></div><div class="ad-placeholder">骞垮憡浣嶆嫑锟?- 鑱旂郴鍚堜綔</div></div></main><footer class="footer"><div class="container">
+<div class="footer-grid">
+<div class="footer-col"><h4>鉁?鍦ㄧ嚎宸ュ叿绠?/h4><p>鍏嶈垂鍦ㄧ嚎宸ュ叿鍚堥泦锛屽寘鍚皝闈㈣璁°€佸崱鐗囧埗浣溿€佸紑鍙戣皟璇曘€佹晥鐜囨彁鍗囩瓑澶氱宸ュ叿锛屾祻瑙堝櫒绔鐞嗭紝鏃犻渶娉ㄥ唽锛屽嵆寮€鍗崇敤銆?/p></div>
+<div class="footer-col"><h4>鍐呭鍒涗綔</h4><a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a><a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a><a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a><a href="/tools/screenshot-studio.html">鎴浘缇庡寲鍣?/a></div>
+<div class="footer-col"><h4>寮€鍙戝伐鍏?/h4><a href="/tools/json-formatter.html">JSON 鏍煎紡鍖?/a><a href="/tools/markdown-converter.html">Markdown 杞崲</a></div>
+<div class="footer-col"><h4>鏁堢巼宸ュ叿</h4><a href="/tools/weekly-report.html">鍛ㄦ姤鐢熸垚鍣?/a><a href="/tools/email-template.html">閭欢妯℃澘</a><a href="/tools/pomodoro.html">鐣寗閽?/a><a href="/tools/todo-manager.html">寰呭姙浜嬮」</a></div>
+</div>
+<div class="footer-bottom"><p>鍦ㄧ嚎宸ュ叿绠?路 鍏嶈垂鍦ㄧ嚎宸ュ叿 路 鏁版嵁鏈湴澶勭悊 路 鏃犻渶娉ㄥ唽</p></div>
+</div></footer><script src="/js/main.js"></script>
+<script>
+var W=1080,H=1080,images=[],renderTimer=null;
+var layouts=[
+{name:"2寮犲乏锟?,max:2,cells:[{x:0,y:0,w:540,h:1080},{x:540,y:0,w:540,h:1080}]},
+{name:"2寮犱笂锟?,max:2,cells:[{x:0,y:0,w:1080,h:540},{x:0,y:540,w:1080,h:540}]},
+{name:"3寮犱竴锟?,max:3,cells:[{x:0,y:0,w:360,h:1080},{x:360,y:0,w:360,h:1080},{x:720,y:0,w:360,h:1080}]},
+{name:"3寮犲ぇ锟?,max:3,cells:[{x:0,y:0,w:540,h:1080},{x:540,y:0,w:540,h:540},{x:540,y:540,w:540,h:540}]},
+{name:"4锟?x2",max:4,cells:[{x:0,y:0,w:540,h:540},{x:540,y:0,w:540,h:540},{x:0,y:540,w:540,h:540},{x:540,y:540,w:540,h:540}]},
+{name:"4寮犲ぇ锟?,max:4,cells:[{x:0,y:0,w:540,h:1080},{x:540,y:0,w:540,h:360},{x:540,y:360,w:540,h:360},{x:540,y:720,w:540,h:360}]}
+];
+var currentLayout=0;
+function initLayouts(){
+ var g=document.getElementById("layoutGrid");
+ layouts.forEach(function(l,i){
+   var b=document.createElement("button");
+   if(i===0)b.className="active";
+   b.innerHTML=l.name+"<br><span style='font-size:.6875rem;color:var(--text-muted)'>鏈€锟?+l.max+"锟?/span>";
+   b.onclick=function(){selectLayout(i);};
+   g.appendChild(b);
+ });
+}
+function selectLayout(idx){
+ currentLayout=idx;
+ document.querySelectorAll("#layoutGrid button").forEach(function(b,i){b.className=i===idx?"active":"";});
+ renderCollage();
+}
+
+function generateDemo(){
+  images=[];
+  var colors=["#667eea","#f093fb","#4facfe","#43e97b","#f5576c","#fbbf24"];
+  var labels=["鎺㈠簵","缇庨","绌挎惌","椋庢櫙","鏃ュ父","濂界墿"];
+  var max=layouts[currentLayout].max;
+  var loaded=0;
+  for(var i=0;i<max;i++){
+    (function(idx){
+      var c=document.createElement("canvas");
+      c.width=200;c.height=200;
+      var cx=c.getContext("2d");
+      cx.fillStyle=colors[idx%colors.length];
+      cx.fillRect(0,0,200,200);
+      cx.fillStyle="#fff";
+      cx.font="bold 28px sans-serif";
+      cx.textAlign="center";cx.textBaseline="middle";
+      cx.fillText(labels[idx%labels.length],100,100);
+      var img=new Image();
+      img.onload=function(){images.push(img);loaded++;if(loaded===max){updateThumbs();renderCollage();}};
+      img.src=c.toDataURL("image/png");
+    })(i);
+  }
+}
+function reverseOrder(){images.reverse();updateThumbs();renderCollage();}
+function clearAll(){images=[];updateThumbs();renderCollage();}
+function updateGap(){
+ document.getElementById("gapVal").textContent=document.getElementById("gapSlider").value;
+ scheduleRender();
+}
+function handleFiles(files){
+ var max=layouts[currentLayout].max;
+ var remaining=max-images.length;
+ var count=Math.min(files.length,remaining);
+ for(var i=0;i<count;i++){
+   (function(file){
+     var reader=new FileReader();
+     reader.onload=function(e){
+       var img=new Image();
+       img.src=e.target.result;
+       img.onload=function(){images.push(img);updateThumbs();renderCollage();};
+     };
+     reader.readAsDataURL(file);
+   })(files[i]);
+ }
+}
+function updateThumbs(){
+ var list=document.getElementById("thumbList");
+ list.innerHTML="";
+ images.forEach(function(img,i){
+   var el=document.createElement("img");
+   el.src=img.src;
+   el.className="thumb";
+   el.title="鐐瑰嚮绉婚櫎";
+   el.style.cssText="width:56px;height:56px;border-radius:6px;object-fit:cover;border:2px solid var(--border);cursor:pointer";
+   el.onclick=function(){images.splice(i,1);updateThumbs();renderCollage();};
+   list.appendChild(el);
+ });
+ var count=document.getElementById("uploadCount");
+ count.textContent="宸蹭笂锟?"+images.length+"/"+layouts[currentLayout].max+" 寮狅紙鐐瑰嚮鍥剧墖绉婚櫎锟?;
+ var zone=document.getElementById("uploadZone");
+ zone.className="upload-zone"+(images.length>0?" has-images":"");
+}
+function scheduleRender(){clearTimeout(renderTimer);renderTimer=setTimeout(renderCollage,120);}
+function renderCollage(){
+ var canvas=document.getElementById("previewCanvas");
+ var ctx=canvas.getContext("2d");
+ canvas.width=W;canvas.height=H;
+ var gap=parseInt(document.getElementById("gapSlider").value)||0;
+ var bg=document.getElementById("bgColor").value||"#f8fafc";
+ ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+ var cells=layouts[currentLayout].cells;
+ cells.forEach(function(cell,i){
+   var cx=cell.x+gap/2,cy=cell.y+gap/2,cw=cell.w-gap,ch=cell.h-gap;
+   if(i<images.length){
+     var img=images[i];
+     var ir=img.width/img.height,cr=cw/ch;
+     var sx=0,sy=0,sw=img.width,sh=img.height;
+     if(ir>cr){sw=img.height*cr;sx=(img.width-sw)/2;}else{sh=img.width/cr;sy=(img.height-sh)/2;}
+     ctx.drawImage(img,sx,sy,sw,sh,cx,cy,cw,ch);
+   }else{
+     ctx.fillStyle="rgba(0,0,0,0.04)";
+     ctx.fillRect(cx,cy,cw,ch);
+     ctx.fillStyle="rgba(0,0,0,0.1)";
+     ctx.font="32px sans-serif";
+     ctx.textAlign="center";ctx.textBaseline="middle";
+     ctx.fillText("+",cx+cw/2,cy+ch/2);
+   }
+ });
+ ctx.globalAlpha=0.2;
+ ctx.fillStyle="#000";
+ ctx.font="14px PingFang SC,Microsoft YaHei,sans-serif";
+ ctx.textAlign="right";ctx.textBaseline="bottom";
+ var dispW=Math.min(540,W/2);
+ canvas.style.width=dispW+"px";
+ canvas.style.height=dispW*H/W+"px";
+}
+function downloadCollage(){
+ var c=document.getElementById("previewCanvas");
+ var a=document.createElement("a");
+ a.download="collage_"+Date.now()+".png";
+ a.href=c.toDataURL("image/png");
+ a.click();
+}
+initLayouts();
+renderCollage();
+</script>
+<script src="/js/animations.js"></script></body>
+</html>

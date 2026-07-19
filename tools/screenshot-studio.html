@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>鎴浘缇庡寲锟?- 鍏嶈垂鍦ㄧ嚎鎴浘缇庡寲宸ュ叿</title>
+<meta name="description" content="鍦ㄧ嚎缇庡寲鎴浘锛屾敮鎸佹坊鍔犳笎鍙樿儗鏅€佸渾瑙掋€侀槾褰便€佹墜鏈烘鍜屾祻瑙堝櫒妗嗭紝閫傚悎灏忕孩涔︽暀绋嬪唴瀹癸拷?>
+<meta name="keywords" content="鎴浘缇庡寲,鎴浘宸ュ叿,鍥剧墖缇庡寲,鎵嬫満锟?娴忚鍣ㄦ,灏忕孩涔︽暀锟?>
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.studio-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+.preview-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center;position:sticky;top:80px}
+.preview-panel canvas{max-width:100%;height:auto;border-radius:6px;box-shadow:var(--shadow-lg);margin:0 auto;display:block}
+.settings-panel .card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:14px}
+.settings-panel .card h3{font-size:.8125rem;font-weight:600;color:var(--text-muted);letter-spacing:.04em;margin-bottom:12px}
+.frame-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.frame-grid button{padding:10px 4px;border:2px solid var(--border);border-radius:var(--radius-sm);background:#fff;cursor:pointer;font-size:.75rem;font-family:var(--font)}
+.frame-grid button:hover{border-color:var(--primary)}
+.frame-grid button.active{border-color:var(--primary);background:var(--primary-50)}
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius-sm);padding:24px;text-align:center;cursor:pointer}
+.upload-zone:hover{border-color:var(--primary);background:var(--primary-50)}
+.upload-zone.has-image{border-style:solid;border-color:var(--success);background:var(--success-light)}
+.upload-zone input{display:none}
+.bg-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.bg-grid span{height:32px;border-radius:6px;cursor:pointer;border:2px solid var(--border)}
+.bg-grid span:hover{border-color:var(--primary)}
+.bg-grid span.active{border-color:var(--primary);border-width:3px}
+.opt-row{display:flex;gap:12px;flex-wrap:wrap}
+.opt-row label{display:flex;align-items:center;gap:4px;font-size:.875rem;cursor:pointer}
+.opt-row input[type=checkbox]{width:auto}
+@media(max-width:860px){.studio-layout{grid-template-columns:1fr}.preview-panel{position:static}}
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner">
+<a href="/" class="header-logo">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+<span>鍦ㄧ嚎宸ュ叿绠?/span>
+</a>
+<nav class="header-nav">
+<a href="/">棣栭〉</a>
+<a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a>
+<a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a>
+<a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a>
+<a href="/tools/screenshot-studio.html">鎴浘缇庡寲</a>
+<a href="/">鍏ㄩ儴宸ュ叿</a>
+</nav>
+</div></header>
+<main class="tool-page"><div class="container"><div class="tool-page-header"><a href="/" class="back-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>杩斿洖棣栭〉</a><h1>鎴浘缇庡寲锟?/h1><p>缁欐埅鍥炬坊鍔犳笎鍙樿儗鏅€佸渾瑙掋€侀槾褰卞拰璁惧妗嗭紝璁╂暀绋嬪唴瀹规洿濂界湅锟?/p></div><div class="studio-layout"><div class="preview-panel"><canvas id="previewCanvas" width="540" height="720"></canvas><div class="size-tip">1080px 锟?路 鑷€傚簲楂樺害</div><button class="btn btn-primary btn-download" onclick="downloadImage()" style="width:100%;padding:14px;font-size:1rem;border-radius:var(--radius);justify-content:center;margin-top:12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>涓嬭浇缇庡寲锟?/button></div><div class="settings-panel"><div class="card"><h3>涓婁紶鎴浘</h3><div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" style="margin-bottom:6px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div style="font-size:.875rem;color:var(--text-muted)" id="uploadText">鐐瑰嚮涓婁紶鎴浘</div><input type="file" id="fileInput" accept="image/*" onchange="handleFile(this.files[0])"></div></div><div class="card"><h3>缇庡寲鏍峰紡</h3><div class="frame-grid" id="frameGrid"><button class="active" data-frame="none">鏃犳娴┖</button><button data-frame="phone">鎵嬫満锟?/button><button data-frame="browser">娴忚鍣ㄦ</button></div></div><div class="card"><h3>娓愬彉鑳屾櫙</h3><div class="bg-grid" id="bgGrid"></div><div style="display:flex;gap:8px;align-items:center;margin-top:8px"><label style="font-size:.8125rem;color:var(--text-secondary)">鑷畾锟?/label><input type="color" id="customBg1" value="#667eea" oninput="scheduleRender()" style="width:32px;height:32px;border:2px solid var(--border);border-radius:6px;cursor:pointer;padding:0;background:none"><input type="color" id="customBg2" value="#764ba2" oninput="scheduleRender()" style="width:32px;height:32px;border:2px solid var(--border);border-radius:6px;cursor:pointer;padding:0;background:none"></div></div><div class="card"><h3>閫夐」</h3><div class="opt-row"><label><input type="checkbox" checked id="optRound" onchange="scheduleRender()"> 鍦嗚</label><label><input type="checkbox" checked id="optShadow" onchange="scheduleRender()"> 闃村奖</label><label><input type="checkbox" id="optTitle" onchange="toggleTitle()"> 鏍囬鏂囧瓧</label></div><div id="titleInput" style="display:none;margin-top:10px"><input type="text" id="titleText" value="App 浣跨敤鏁欑▼" placeholder="杈撳叆鏍囬..." oninput="scheduleRender()"></div></div><div class="card"><h3>蹇嵎鎿嶄綔</h3><button class="btn btn-outline" onclick="loadDemo()" style="width:100%;justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 鐢熸垚绀轰緥鎴浘</button></div></div></div><div class="ad-placeholder">骞垮憡浣嶆嫑锟?- 鑱旂郴鍚堜綔</div></div></main><footer class="footer"><div class="container">
+<div class="footer-grid">
+<div class="footer-col"><h4>鉁?鍦ㄧ嚎宸ュ叿绠?/h4><p>鍏嶈垂鍦ㄧ嚎宸ュ叿鍚堥泦锛屽寘鍚皝闈㈣璁°€佸崱鐗囧埗浣溿€佸紑鍙戣皟璇曘€佹晥鐜囨彁鍗囩瓑澶氱宸ュ叿锛屾祻瑙堝櫒绔鐞嗭紝鏃犻渶娉ㄥ唽锛屽嵆寮€鍗崇敤銆?/p></div>
+<div class="footer-col"><h4>鍐呭鍒涗綔</h4><a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a><a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a><a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a><a href="/tools/screenshot-studio.html">鎴浘缇庡寲鍣?/a></div>
+<div class="footer-col"><h4>寮€鍙戝伐鍏?/h4><a href="/tools/json-formatter.html">JSON 鏍煎紡鍖?/a><a href="/tools/markdown-converter.html">Markdown 杞崲</a></div>
+<div class="footer-col"><h4>鏁堢巼宸ュ叿</h4><a href="/tools/weekly-report.html">鍛ㄦ姤鐢熸垚鍣?/a><a href="/tools/email-template.html">閭欢妯℃澘</a><a href="/tools/pomodoro.html">鐣寗閽?/a><a href="/tools/todo-manager.html">寰呭姙浜嬮」</a></div>
+</div>
+<div class="footer-bottom"><p>鍦ㄧ嚎宸ュ叿绠?路 鍏嶈垂鍦ㄧ嚎宸ュ叿 路 鏁版嵁鏈湴澶勭悊 路 鏃犻渶娉ㄥ唽</p></div>
+</div></footer><script src="/js/main.js"></script>
+<script>
+var imgSrc=null,imageData=null;
+var bgPresets=[
+["#667eea","#764ba2"],["#f093fb","#f5576c"],["#4facfe","#00f2fe"],["#43e97b","#38f9d7"],
+["#fa709a","#fee140"],["#a18cd1","#fbc2eb"],["#fccb90","#d57eeb"],["#e0c3fc","#8ec5fc"],
+["#0c3483","#a2b6df"],["#232526","#414345"],["#ffe0b2","#fff"],["#d4edda","#fff"]
+];
+var currentFrame="none";
+var renderTimer=null;
+function initBg(){
+ var g=document.getElementById("bgGrid");
+ bgPresets.forEach(function(p,i){
+   var s=document.createElement("span");
+   s.style.background="linear-gradient(135deg,"+p[0]+","+p[1]+")";
+   if(i===0)s.className="active";
+   s.onclick=function(){
+     document.querySelectorAll("#bgGrid span").forEach(function(x){x.className="";});
+     s.className="active";
+     document.getElementById("customBg1").value=p[0];
+     document.getElementById("customBg2").value=p[1];
+     scheduleRender();
+   };
+   g.appendChild(s);
+ });
+}
+(function(){var fn=function(){initBg();document.querySelectorAll('#frameGrid button').forEach(function(b){b.onclick=function(){document.querySelectorAll('#frameGrid button').forEach(function(x){x.className='';});b.className='active';currentFrame=b.dataset.frame;scheduleRender();};});};if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fn);}else{fn();}})();
+function handleFile(file){
+ if(!file)return;
+ var reader=new FileReader();
+ reader.onload=function(e){
+   var img=new Image();
+   img.onload=function(){
+     imgSrc=img;
+     document.getElementById("uploadZone").className="upload-zone has-image";
+     document.getElementById("uploadText").textContent="宸蹭笂锟? "+file.name;
+     renderImage();
+   };
+   img.src=e.target.result;
+ };
+ reader.readAsDataURL(file);
+}
+function toggleTitle(){
+ var el=document.getElementById("titleInput");
+ el.style.display=document.getElementById("optTitle").checked?"block":"none";
+ scheduleRender();
+}
+function loadDemo(){
+ var c=document.createElement("canvas");
+ c.width=400;c.height=800;
+ var cx=c.getContext("2d");
+ cx.fillStyle="#f8fafc";cx.fillRect(0,0,400,800);
+ // Draw a fake app screen
+ cx.fillStyle="#3b82f6";cx.fillRect(0,0,400,60);
+ cx.fillStyle="#fff";cx.font="bold 18px sans-serif";
+ cx.textAlign="center";cx.textBaseline="middle";
+ cx.fillText("My App",200,30);
+ // Content blocks
+ var colors=["#e2e8f0","#cbd5e1","#94a3b8"];
+ for(var i=0;i<6;i++){
+   cx.fillStyle=colors[i%3];
+   cx.beginPath();
+   cx.roundRect(40,90+i*115,320,95,8);
+   cx.fill();
+ }
+ c.toBlob(function(b){
+   var f=new File([b],"demo.png",{type:"image/png"});
+   handleFile(f);
+ });
+}
+function scheduleRender(){clearTimeout(renderTimer);renderTimer=setTimeout(renderImage,120);}
+function renderImage(){
+ if(!imgSrc){renderPlaceholder();return;}
+ var canvas=document.getElementById("previewCanvas");
+ var ctx=canvas.getContext("2d");
+ var CW=1080;
+ var bg1=document.getElementById("customBg1").value;
+ var bg2=document.getElementById("customBg2").value;
+ var round=document.getElementById("optRound").checked;
+ var shadow=document.getElementById("optShadow").checked;
+ var title=document.getElementById("optTitle").checked?document.getElementById("titleText").value:"";
+ var pad=50;
+ var titleH=title?80:0;
+ var totalH=0;
+ var imgW=0,imgH=0,imgX=0,imgY=0;
+ if(currentFrame==="none"){
+   var maxContentW=CW-pad*2-40;
+   var ar=imgSrc.width/imgSrc.height;
+   imgW=Math.min(maxContentW,imgSrc.width);
+   imgH=imgW/ar;
+   if(imgH>1200){imgH=1200;imgW=imgH*ar;}
+   imgX=(CW-imgW)/2;
+   imgY=pad+titleH+20;
+   totalH=imgY+imgH+pad;
+ }
+ else if(currentFrame==="phone"){
+   var phoneW=480,phoneH=960;
+   var screenW=442,screenH=902;
+   var screenX=(CW-phoneW)/2+(phoneW-screenW)/2;
+   var screenY=pad+titleH+(phoneH-screenH)/2+5;
+   var ar=imgSrc.width/imgSrc.height;
+   var sw=screenW,sh=screenW/ar;
+   if(sh>screenH){sh=screenH;sw=screenH*ar;}
+   imgW=sw;imgH=sh;
+   imgX=screenX+(screenW-sw)/2;
+   imgY=screenY+(screenH-sh)/2;
+   totalH=pad+titleH+phoneH+pad;
+ }
+ else if(currentFrame==="browser"){
+   var browW=880;
+   var ar=imgSrc.width/imgSrc.height;
+   var browH=Math.min(1000,Math.max(500,browW/ar));
+   var titleBarH=40;
+   var contentH=browH-titleBarH;
+   var contentW=browW-4;
+   var browX=(CW-browW)/2;
+   var browY=pad+titleH+10;
+   var ar2=imgSrc.width/imgSrc.height;
+   var cw=contentW,ch=cw/ar2;
+   if(ch>contentH){ch=contentH;cw=ch*ar2;}
+   imgW=cw;imgH=ch;
+   imgX=browX+2+(contentW-cw)/2;
+   imgY=browY+titleBarH+(contentH-ch)/2;
+   totalH=browY+browH+pad;
+ }
+ canvas.width=CW;canvas.height=Math.max(400,totalH);
+ var grad=ctx.createLinearGradient(0,0,CW,totalH);
+ grad.addColorStop(0,bg1);grad.addColorStop(1,bg2);
+ ctx.fillStyle=grad;ctx.fillRect(0,0,CW,totalH);
+ if(title){
+   ctx.fillStyle="#fff";ctx.globalAlpha=0.85;
+   ctx.font="bold 28px PingFang SC,Microsoft YaHei,sans-serif";
+   ctx.textAlign="center";ctx.textBaseline="middle";
+   ctx.fillText(title,CW/2,pad+28);
+   ctx.globalAlpha=1;
+ }
+ if(currentFrame==="phone"){
+   var px=(CW-480)/2,py=pad+titleH;
+   // Phone body
+   ctx.shadowColor="rgba(0,0,0,0.25)";ctx.shadowBlur=30;ctx.shadowOffsetY=5;
+   ctx.fillStyle="#1a1a1a";
+   roundRect(ctx,px,py,480,960,42);
+   ctx.fill();
+   ctx.shadowColor="transparent";ctx.shadowBlur=0;
+   // Screen bezel
+   ctx.fillStyle="#000";
+   roundRect(ctx,px+8,py+8,464,944,36);
+   ctx.fill();
+   // Notch
+   ctx.fillStyle="#1a1a1a";
+   roundRect(ctx,px+140,py+10,200,22,11);
+   ctx.fill();
+   // Camera dot
+   ctx.fillStyle="#1e293b";ctx.beginPath();ctx.arc(px+240,py+12,4,0,Math.PI*2);ctx.fill();
+ }
+ if(currentFrame==="browser"){
+   var bx=(CW-880)/2,by=pad+titleH+10;
+   ctx.shadowColor="rgba(0,0,0,0.2)";ctx.shadowBlur=25;ctx.shadowOffsetY=4;
+   // Browser window
+   roundRect(ctx,bx,by,880,browH,10);
+   ctx.fillStyle="#1e293b";ctx.fill();
+   ctx.shadowColor="transparent";ctx.shadowBlur=0;
+   // Title bar
+   ctx.fillStyle="#334155";
+   roundRect(ctx,bx,by,880,titleBarH,10);
+   ctx.fillRect(bx,by+4,880,titleBarH-4);
+   // Dots
+   ["#ef4444","#fbbf24","#10b981"].forEach(function(c,i){
+     ctx.fillStyle=c;ctx.beginPath();ctx.arc(bx+22+i*22,by+20,7,0,Math.PI*2);ctx.fill();
+   });
+   // URL bar
+   ctx.fillStyle="#475569";
+   roundRect(ctx,bx+90,by+10,700,20,10);ctx.fill();
+   ctx.fillStyle="#94a3b8";ctx.font="11px sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";
+   ctx.fillText("https://example.com",bx+440,by+20);
+   // White content area
+   ctx.fillStyle="#fff";
+   roundRect(ctx,bx+2,by+titleBarH,876,browH-titleBarH,0);
+   ctx.fill();
+ }
+ ctx.save();
+ if(round){
+   ctx.beginPath();
+   roundRect(ctx,imgX,imgY,imgW,imgH,12);
+   ctx.clip();
+ }
+ if(shadow){
+   ctx.shadowColor="rgba(0,0,0,0.15)";
+   ctx.shadowBlur=20;
+   ctx.shadowOffsetX=0;
+   ctx.shadowOffsetY=4;
+ }
+ ctx.drawImage(imgSrc,imgX,imgY,imgW,imgH);
+ ctx.restore();
+ var dispW=Math.min(540,CW/2);
+ canvas.style.width=dispW+"px";
+ canvas.style.height=Math.max(400,totalH)*dispW/CW+"px";
+ document.querySelector(".size-tip").textContent=CW+"x"+Math.max(400,totalH)+"px | 鑷€傚簲";
+}
+function renderPlaceholder(){
+ var canvas=document.getElementById("previewCanvas");
+ var ctx=canvas.getContext("2d");
+ canvas.width=540;canvas.height=720;
+ ctx.fillStyle="#f1f5f9";ctx.fillRect(0,0,540,720);
+ ctx.fillStyle="#94a3b8";ctx.font="18px sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";
+ ctx.fillText("涓婁紶鎴浘鍚庢樉绀洪锟?,270,360);
+ ctx.font="14px sans-serif";ctx.fillText("鏀寔 PNG / JPG 鏍煎紡",270,400);
+ canvas.style.width="540px";canvas.style.height="720px";
+}
+function roundRect(ctx,x,y,w,h,r){
+ ctx.beginPath();
+ ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);
+ ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+ ctx.lineTo(x+w,y+h-r);
+ ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+ ctx.lineTo(x+r,y+h);
+ ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+ ctx.lineTo(x,y+r);
+ ctx.quadraticCurveTo(x,y,x+r,y);
+ ctx.closePath();
+}
+function downloadImage(){
+ var canvas=document.getElementById("previewCanvas");
+ var a=document.createElement("a");
+ a.download="screenshot_"+Date.now()+".png";
+ a.href=canvas.toDataURL("image/png");
+ a.click();
+}
+renderPlaceholder();
+</script>
+<script src="/js/animations.js"></script></body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>封面工坊 - 免费在线封面图生成器</title>
+<meta name="description" content="专为小红书创作者设计的封面图生成工具，12款专业模板，自定义文字和颜色，一键下载高清PNG。">
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+<header class="header"><div class="header-inner">
+<a href="/" class="header-logo"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg><span>在线工具箱</span></a>
+<nav class="header-nav"><a href="/">首页</a><a href="/#tools">全部工具</a></nav>
+</div></header>
+<main class="tool-page">
+<div class="container">
+<div class="tool-page-header">
+<a href="/" class="back-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>返回首页</a>
+<style>
+.studio-layout{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start}.preview-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;position:sticky;top:80px;text-align:center;box-shadow:var(--shadow)}.preview-panel canvas{max-width:100%;height:auto;border-radius:8px;box-shadow:var(--shadow-lg);display:block;margin:0 auto}.preview-panel .preview-label{font-size:.75rem;color:var(--text-muted);margin-top:10px;margin-bottom:8px}.font-size-row{display:flex;gap:8px}.font-size-row button{flex:1;padding:8px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg-card);cursor:pointer;font-size:.8rem;font-family:var(--font);transition:all .12s}.font-size-row button:hover,.font-size-row button.active{border-color:var(--primary);background:var(--primary-50);font-weight:600}@media(max-width:860px){.studio-layout{grid-template-columns:1fr}.preview-panel{position:static}.preview-panel canvas{max-width:320px}}
+</style>"<h1>封面工坊<span class="badge">v1.0</span></h1>
+<p>选模板、填文字、调颜色，一键生成小红书封面。浏览器端处理，不上传服务器。</p>
+</div>
+<div class="studio-layout">
+<div class="preview-panel">
+<canvas id="previewCanvas" width="540" height="720"></canvas>
+<div class="preview-label">1080 x 1440 | 3:4 | 小红书封面标准尺寸</div>
+<button class="btn btn-primary btn-download" onclick="downloadCover()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>免费下载</button>
+<button class="btn-random" onclick="randomTemplate()">随机模板</button>
+<button class="btn-random" style="margin-top:8px" onclick="exampleText()">示例文案</button>
+</div>
+<div class="settings-panel">
+<div class="settings-card"><h3>封面模板</h3><div class="grid-select grid-select-3" id="tplGrid"></div></div>
+<div class="settings-card"><h3>文字内容</h3>
+<div class="form-group"><label>主标题</label><input type="text" id="mainTitle" value="新手也能做出" oninput="scheduleRender()"></div>
+<div class="form-group"><label>副标题</label><input type="text" id="subTitle" value="高级感小红书封面" oninput="scheduleRender()"></div>
+<div class="form-group"><label>底部文字</label><input type="text" id="footerText" value="关注我 - 每天学一点" oninput="scheduleRender()"></div>
+</div>
+<div class="settings-card"><h3>字号</h3><div class="font-size-row" id="fontSizeRow">
+<button data-size="small">小</button><button data-size="medium" class="active">中</button><button data-size="large">大</button>
+</div></div>
+<div class="settings-card"><h3>颜色</h3>
+<div class="color-group" style="margin-bottom:8px">
+<label>背景</label><input type="color" id="bgColor" value="#667eea" oninput="scheduleRender()">
+<label>文字</label><input type="color" id="textColor" value="#ffffff" oninput="scheduleRender()">
+<label>强调</label><input type="color" id="accentColor" value="#fbbf24" oninput="scheduleRender()">
+</div>
+<div class="palette-row" id="paletteRow"></div>
+</div>
+<div class="settings-card"><h3>装饰</h3>
+<select id="decoStyle" onchange="scheduleRender()">
+<option value="circles">圆形装饰</option><option value="lines">线条装饰</option><option value="dots">圆点装饰</option><option value="none">无装饰</option>
+</select>
+<div class="form-group" style="margin-top:10px"><label style="font-weight:400;font-size:.8rem;color:var(--text-secondary)">文字对齐</label>
+<select id="textAlign" onchange="scheduleRender()"><option value="center">居中</option><option value="left">左对齐</option></select></div>
+</div>
+<div class="settings-card"><h3>小红书封面小贴士</h3>
+<ul style="font-size:.8rem;color:var(--text-secondary);line-height:1.8;padding-left:16px">
+<li>主标题控制在 8 字以内效果最佳</li>
+<li>使用对比色让文字更突出</li>
+<li>留白多一点，高级感多一分</li>
+<li>封面尺寸固定 3:4（1080x1440）</li>
+</ul>
+</div>
+</div>
+</div>
+<script>
+var W=1080,H=1440,currentTpl="minimal",renderTimer=null;
+var templates=[
+{id:"minimal",name:"简约白",bg:"#ffffff",txt:"#1e293b",acc:"#3b82f6",deco:"circles"},
+{id:"warm",name:"温暖推荐",bg:"#f093fb",txt:"#ffffff",acc:"#fff",deco:"dots"},
+{id:"tutorial",name:"攻略教程",bg:"#4facfe",txt:"#ffffff",acc:"#fde68a",deco:"lines"},
+{id:"deep",name:"干货知识",bg:"#1e3c72",txt:"#ffffff",acc:"#38bdf8",deco:"lines"},
+{id:"vibe",name:"Vlog日常",bg:"#a18cd1",txt:"#ffffff",acc:"#fbc2eb",deco:"circles"},
+{id:"nature",name:"自然清新",bg:"#11998e",txt:"#ffffff",acc:"#fde68a",deco:"circles"},
+{id:"bold",name:"潮流大胆",bg:"#232526",txt:"#ffffff",acc:"#ef4444",deco:"dots"},
+{id:"soft",name:"温柔奶茶",bg:"#fce4c8",txt:"#5d4037",acc:"#e8a87c",deco:"circles"},
+{id:"ocean",name:"海洋蓝",bg:"#0c3483",txt:"#ffffff",acc:"#6dd5fa",deco:"lines"},
+{id:"sunset",name:"落日红",bg:"#f5576c",txt:"#ffffff",acc:"#fde68a",deco:"dots"},
+{id:"clean",name:"清爽绿",bg:"#d4edda",txt:"#155724",acc:"#28a745",deco:"none"},
+{id:"premium",name:"高级灰",bg:"#495057",txt:"#ffffff",acc:"#f8f9fa",deco:"lines"}
+];
+var palettes=[
+["#667eea","#764ba2","#f093fb","#f5576c","#4facfe","#43e97b"],
+["#1e3c72","#2a5298","#232526","#414345","#0c3483","#495057"],
+["#ffffff","#fce4c8","#d4edda","#ffe0b2","#e8f5e9","#f3e5f5"]
+];
+function init(){
+  var g=document.getElementById("tplGrid");
+  templates.forEach(function(t,i){
+    var b=document.createElement("button");
+    b.innerHTML='<span class="swatch" style="background:'+t.bg+'"></span>'+t.name;
+    if(i===0)b.className="active";
+    b.onclick=function(){selectTpl(i);};g.appendChild(b);});
+  var pRow=document.getElementById("paletteRow");
+  palettes.forEach(function(group){group.forEach(function(c){
+    var s=document.createElement("span");s.style.background=c;
+    if(c==="#667eea")s.className="active";
+    s.onclick=function(){document.querySelectorAll("#paletteRow span").forEach(function(x){x.className="";});s.className="active";document.getElementById("bgColor").value=c;scheduleRender();};pRow.appendChild(s);});});
+  document.querySelectorAll("#fontSizeRow button").forEach(function(b){
+    b.onclick=function(){document.querySelectorAll("#fontSizeRow button").forEach(function(x){x.className="";});b.className="active";scheduleRender();};});
+  renderCard();
+}
+function selectTpl(idx){currentTpl=templates[idx].id;document.querySelectorAll("#tplGrid button").forEach(function(b,i){b.className=i===idx?"active":"";});var t=templates[idx];document.getElementById("bgColor").value=t.bg;document.getElementById("textColor").value=t.txt;document.getElementById("accentColor").value=t.acc;document.getElementById("decoStyle").value=t.deco;renderCard();}
+function scheduleRender(){clearTimeout(renderTimer);renderTimer=setTimeout(renderCard,120);}
+function wrapText(ctx,text,maxW){var lines=[],paras=text.split("\n");paras.forEach(function(para){if(!para.trim()){lines.push("");return;}var line="";for(var i=0;i<para.length;i++){var test=line+para[i];if(ctx.measureText(test).width>maxW&&line){lines.push(line);line=para[i];}else line=test;}if(line)lines.push(line);});return lines;}
+function renderCard(){
+  var canvas=document.getElementById("previewCanvas"),ctx=canvas.getContext("2d");
+  canvas.width=W;canvas.height=H;
+  var bgColor=document.getElementById("bgColor").value,textColor=document.getElementById("textColor").value,accentColor=document.getElementById("accentColor").value;
+  var mainTitle=document.getElementById("mainTitle").value.trim()||"标题",subTitle=document.getElementById("subTitle").value.trim(),footerText=document.getElementById("footerText").value.trim();
+  var decoStyle=document.getElementById("decoStyle").value,textAlign=document.getElementById("textAlign").value;
+  var fontSize=document.querySelector("#fontSizeRow .active").dataset.size;
+  var grad=ctx.createLinearGradient(0,0,W,H);grad.addColorStop(0,bgColor);grad.addColorStop(1,adjustColor(bgColor,-35));ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+  ctx.globalAlpha=0.12;
+  if(decoStyle==="circles"){ctx.fillStyle=accentColor;[[900,200,160],[180,1200,120],[150,300,60],[950,900,90]].forEach(function(a){ctx.beginPath();ctx.arc(a[0],a[1],a[2],0,Math.PI*2);ctx.fill();});}
+  else if(decoStyle==="lines"){ctx.strokeStyle=accentColor;ctx.lineWidth=3;for(var i=0;i<7;i++){var x=80+i*140;ctx.beginPath();ctx.moveTo(x,80);ctx.lineTo(x+30,140);ctx.stroke();}}
+  else if(decoStyle==="dots"){ctx.fillStyle=accentColor;for(var i=0;i<25;i++){var x=(i*137+47)%W,y=(i*89+113)%H;ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fill();}}
+  ctx.globalAlpha=1;
+  var tSize=fontSize==="large"?82:fontSize==="small"?54:68;if(mainTitle.length>10)tSize=Math.floor(tSize*0.75);
+  ctx.fillStyle=textColor;ctx.font="bold "+tSize+'px "PingFang SC","Microsoft YaHei",sans-serif';ctx.textAlign=textAlign==="left"?"left":"center";ctx.textBaseline="top";
+  var maxW=W-160,tLines=wrapText(ctx,mainTitle,maxW),lh=tSize*1.35,tBlockH=tLines.length*lh,tY=textAlign==="left"?340:(H-600);
+  tLines.forEach(function(line,i){ctx.fillText(line,textAlign==="left"?80:W/2,tY+i*lh);});
+  if(subTitle){ctx.globalAlpha=0.75;ctx.fillStyle=textColor;var sSize=fontSize==="large"?38:fontSize==="small"?26:32;ctx.font=sSize+'px "PingFang SC","Microsoft YaHei",sans-serif';var sLines=wrapText(ctx,subTitle,maxW);var sY=tY+tBlockH+45;sLines.forEach(function(line,i){ctx.fillText(line,textAlign==="left"?80:W/2,sY+i*48);});ctx.globalAlpha=1;}
+  if(footerText){ctx.globalAlpha=0.4;ctx.fillStyle=textColor;ctx.font='24px "PingFang SC","Microsoft YaHei",sans-serif';ctx.textAlign="center";ctx.textBaseline="bottom";ctx.fillText(footerText,W/2,H-50);ctx.globalAlpha=1;}
+  document.getElementById("previewCanvas").style.width="540px";document.getElementById("previewCanvas").style.height="720px";
+}
+function randomTemplate(){var idx=Math.floor(Math.random()*templates.length);selectTpl(idx);}
+var examples=[["新手也能做出","高级感小红书封面","关注我 - 每天学一点"],["今日份探店","藏在胡同里的宝藏咖啡","美食探店"],["穿搭分享","一周通勤穿搭不重样","关注看更多"],["读书笔记","改变认知的3本书","每周一书"],["干货来了","新手做小红书必知10件事","收藏慢慢看"],["好物推荐","无限回购的平价好物","亲测好用"]];
+var exIdx=0;
+function exampleText(){var ex=examples[exIdx%examples.length];document.getElementById("mainTitle").value=ex[0];document.getElementById("subTitle").value=ex[1];document.getElementById("footerText").value=ex[2];exIdx++;renderCard();}
+function adjustColor(hex,amt){var n=parseInt(hex.replace("#",""),16);var r=Math.min(255,Math.max(0,(n>>16)+amt));var g=Math.min(255,Math.max(0,((n>>8)&0xFF)+amt));var b=Math.min(255,Math.max(0,(n&0xFF)+amt));return "#"+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);}
+function downloadCover(){var canvas=document.getElementById("previewCanvas");var link=document.createElement("a");link.download="xiaohongshu_cover_"+Date.now()+".png";link.href=canvas.toDataURL("image/png");link.click();}
+init();
+</script></div>
+</main>
+<footer class="footer"><div class="container">
+<div class="footer-grid">
+<div class="footer-col"><h4>✦ 在线工具箱</h4><p>免费在线工具合集，包含封面设计、卡片制作、开发调试、效率提升等多种工具，浏览器端处理，无需注册，即开即用。</p></div>
+<div class="footer-col"><h4>内容创作</h4><a href="/tools/cover-studio.html">封面工坊</a><a href="/tools/quote-studio.html">卡片工坊</a><a href="/tools/collage-studio.html">拼图工坊</a><a href="/tools/screenshot-studio.html">截图美化器</a></div>
+<div class="footer-col"><h4>开发工具</h4><a href="/tools/json-formatter.html">JSON 格式化</a><a href="/tools/markdown-converter.html">Markdown 转换</a></div>
+<div class="footer-col"><h4>效率工具</h4><a href="/tools/weekly-report.html">周报生成器</a><a href="/tools/email-template.html">邮件模板</a><a href="/tools/pomodoro.html">番茄钟</a><a href="/tools/todo-manager.html">待办事项</a></div>
+</div>
+<div class="footer-bottom"><p>在线工具箱 · 免费在线工具 · 数据本地处理 · 无需注册</p></div>
+</div></footer>
+<script src="/js/main.js"></script>
+<script src="/js/animations.js"></script>
+</body>
+</html>

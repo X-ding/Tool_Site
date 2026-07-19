@@ -1,0 +1,15 @@
+﻿# Python
+*.pyc
+__pycache__/
+*.pyo
+*.bak
+_gen_*.py
+_fix*.py
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

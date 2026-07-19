@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鏁忔劅璇嶆锟?- 鍏嶈垂鍦ㄧ嚎鏁忔劅璇嶈繃婊ゅ伐锟?/title>
+<meta name="description" content="蹇€熸娴嬫枃鏈腑鐨勬晱鎰熻瘝銆佽繚绂佽瘝銆佸箍鍛婃硶绂佺敤璇嶏紝閫傜敤浜庡皬绾功銆佹姈闊崇瓑骞冲彴鍐呭瀹℃牳锟?>
+<meta name="keywords" content="鏁忔劅璇嶆锟?杩濈璇嶆锟?骞垮憡娉曠鐢ㄨ瘝,鍐呭瀹℃牳,鏁忔劅璇嶈繃锟?>
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.sens-match { background:#fee2e2; color:#dc2626; border-radius:2px; padding:1px 2px; }
+.sens-summary { margin-bottom:16px; }
+.sens-summary .count { font-size:1.25rem; font-weight:700; color:var(--danger); }
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner">
+<a href="/" class="header-logo">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+<span>鍦ㄧ嚎宸ュ叿绠?/span>
+</a>
+<nav class="header-nav">
+<a href="/">棣栭〉</a>
+<a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a>
+<a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a>
+<a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a>
+<a href="/tools/screenshot-studio.html">鎴浘缇庡寲</a>
+<a href="/">鍏ㄩ儴宸ュ叿</a>
+</nav>
+</div></header>
+<main class="tool-page">
+  <div class="container">
+    <div class="tool-page-header">
+      <a href="/" class="back-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>杩斿洖棣栭〉</a>
+      <h1>鏁忔劅璇嶆锟?/h1>
+      <p>妫€娴嬫枃鏈腑鐨勬晱鎰熻瘝銆佽繚绂佽瘝涓庡箍鍛婃硶绂佺敤璇嶏紝閫傜敤浜庡唴瀹瑰鏍镐笌鍚堣妫€鏌ワ拷?/p>
+    </div>
+    <div class="tool-body">
+      <div class="sens-summary" id="summaryArea" style="display:none">
+        鍏卞彂锟?<span class="count" id="matchCount">0</span> 澶勬晱鎰熻瘝鍖归厤
+      </div>
+      <div class="form-group">
+        <label>杈撳叆瑕佹娴嬬殑鏂囨湰</label>
+        <textarea id="inputText" placeholder="灏嗛渶瑕佹娴嬬殑鏂囨绮樿创鍒拌繖锟?.." style="min-height:200px"></textarea>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="checkSensitive()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          寮€濮嬫锟?        </button>
+        <button class="btn btn-outline" onclick="clearAll()">娓呯┖</button>
+      </div>
+      <div class="output-area hidden" id="outputArea">
+        <div class="output-label">妫€娴嬬粨锟?/div>
+        <div class="output-content" id="resultOutput"></div>
+        <div class="output-area" id="detailArea" style="display:none">
+          <div class="output-label">鍖归厤璇︽儏</div>
+          <div class="output-content" id="detailOutput"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ad-placeholder">骞垮憡浣嶆嫑锟?路 鑱旂郴鍚堜綔</div>
+  </div>
+</main>
+<footer class="footer"><div class="container">
+<div class="footer-grid">
+<div class="footer-col"><h4>鉁?鍦ㄧ嚎宸ュ叿绠?/h4><p>鍏嶈垂鍦ㄧ嚎宸ュ叿鍚堥泦锛屽寘鍚皝闈㈣璁°€佸崱鐗囧埗浣溿€佸紑鍙戣皟璇曘€佹晥鐜囨彁鍗囩瓑澶氱宸ュ叿锛屾祻瑙堝櫒绔鐞嗭紝鏃犻渶娉ㄥ唽锛屽嵆寮€鍗崇敤銆?/p></div>
+<div class="footer-col"><h4>鍐呭鍒涗綔</h4><a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a><a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a><a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a><a href="/tools/screenshot-studio.html">鎴浘缇庡寲鍣?/a></div>
+<div class="footer-col"><h4>寮€鍙戝伐鍏?/h4><a href="/tools/json-formatter.html">JSON 鏍煎紡鍖?/a><a href="/tools/markdown-converter.html">Markdown 杞崲</a></div>
+<div class="footer-col"><h4>鏁堢巼宸ュ叿</h4><a href="/tools/weekly-report.html">鍛ㄦ姤鐢熸垚鍣?/a><a href="/tools/email-template.html">閭欢妯℃澘</a><a href="/tools/pomodoro.html">鐣寗閽?/a><a href="/tools/todo-manager.html">寰呭姙浜嬮」</a></div>
+</div>
+<div class="footer-bottom"><p>鍦ㄧ嚎宸ュ叿绠?路 鍏嶈垂鍦ㄧ嚎宸ュ叿 路 鏁版嵁鏈湴澶勭悊 路 鏃犻渶娉ㄥ唽</p></div>
+</div></footer>
+<script src="/js/main.js"></script>
+<script>
+const sensitiveWords = [
+  { word: '绗竴', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?绗竴"绛夌粷瀵瑰寲鐢ㄨ' },
+  { word: '鏈€', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?鏈€"瀛楀ご缁濆鍖栫敤锟? },
+  { word: '鍥藉锟?, cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?鍥藉锟?鐢ㄨ' },
+  { word: '椤剁骇', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?椤剁骇"绛夌粷瀵瑰寲鐢ㄨ' },
+  { word: '鏋佸搧', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?鏋佸搧"鐢ㄨ' },
+  { word: '绗竴鍝佺墝', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?绗竴鍝佺墝"鐢ㄨ' },
+  { word: '100%', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?100%"绛変繚璇佹€х敤锟? },
+  { word: '鍏ㄧ綉', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?鍏ㄧ綉"绛夎寖鍥存€х敤锟? },
+  { word: '姘镐箙', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?姘镐箙"绛夋壙璇烘€х敤锟? },
+  { word: '鍞竴', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?鍞竴"绛夋帓浠栨€х敤锟? },
+  { word: '瀹岀編', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?瀹岀編"绛夌粷瀵瑰寲鐢ㄨ' },
+  { word: '鐙垱', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?鐙垱"鐢ㄨ' },
+  { word: '鏈€锟?, cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?鏈€锟?绛夋渶楂樼骇鐢ㄨ' },
+  { word: '鏈€锟?, cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?鏈€锟?绛夊眰绾х敤锟? },
+  { word: '棣栨', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?棣栨"鐢ㄨ' },
+  { word: '棣栦釜', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?棣栦釜"鐢ㄨ' },
+  { word: '缁濆', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?缁濆"鐢ㄨ' },
+  { word: '鐗规晥', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠锟?鐗规晥"绛夊尰鐤楁殫绀虹敤锟? },
+  { word: '鏍规不', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?鏍规不"绛夊尰鐤楁壙锟? },
+  { word: '鐧惧垎锟?, cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝娇锟?鐧惧垎锟?绛夌粷瀵逛繚璇佺敤锟? },
+  { word: '鏃犲壇浣滅敤', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曠姝㈡壙锟?鏃犲壇浣滅敤"' },
+  { word: '鍋囦竴璧斿崄', cat: '骞垮憡娉曠锟?, note: '骞垮憡娉曢檺鍒朵娇锟?鍋囦竴璧斿崄"鎵胯' },
+  { word: '鐐瑰嚮', cat: '璇卞琛屼负', note: '娉ㄦ剰"鐐瑰嚮"鍦ㄨ瀵煎満鏅笅鐨勪娇锟? },
+  { word: '绔嬪嵆璐拱', cat: '璇卞琛屼负', note: '娉ㄦ剰"绔嬪嵆璐拱"绛夊偓淇冭喘涔扮敤锟? },
+  { word: '闄愭椂', cat: '璇卞琛屼负', note: '娉ㄦ剰"闄愭椂"鍦ㄤ績閿€鍦烘櫙涓嬬殑鍚堣浣跨敤' },
+  { word: '绱э拷?, cat: '璇卞琛屼负', note: '娉ㄦ剰"绱э拷?鍦ㄨ惀閿€鍦烘櫙涓嬬殑鍚堣浣跨敤' },
+  { word: '鍏嶈垂棰嗗彇', cat: '璇卞琛屼负', note: '娉ㄦ剰"鍏嶈垂棰嗗彇"鐨勫悎瑙勮〃锟? },
+  { word: '涓嶈禋锟?, cat: '璇卞琛屼负', note: '娉ㄦ剰"涓嶈禋锟?绛変簭鎹熸殫绀虹敤锟? },
+  { word: '鐐瑰嚮棰嗗彇', cat: '璇卞琛屼负', note: '娉ㄦ剰"鐐瑰嚮棰嗗彇"绛夎瀵肩偣鍑荤敤锟? },
+];
+
+function checkSensitive() {
+  const text = document.getElementById('inputText').value;
+  if (!text.trim()) { alert('璇疯緭鍏ヨ妫€娴嬬殑鏂囨湰'); return; }
+
+  const matches = [];
+  let highlighted = text;
+
+  sensitiveWords.forEach(sw => {
+    const re = new RegExp(sw.word, 'gi');
+    let match;
+    while ((match = re.exec(text)) !== null) {
+      matches.push({ word: sw.word, cat: sw.cat, note: sw.note, index: match.index });
+    }
+  });
+
+  matches.sort((a, b) => a.index - b.index);
+
+  // Deduplicate overlapping matches
+  const unique = [];
+  matches.forEach(m => {
+    if (unique.length === 0 || m.index !== unique[unique.length-1].index) {
+      unique.push(m);
+    }
+  });
+
+  const summary = document.getElementById('summaryArea');
+  const count = document.getElementById('matchCount');
+  count.textContent = unique.length;
+  summary.style.display = unique.length > 0 ? 'block' : 'none';
+
+  const result = document.getElementById('resultOutput');
+  const detail = document.getElementById('detailOutput');
+  const detailArea = document.getElementById('detailArea');
+
+  if (unique.length === 0) {
+    result.innerHTML = '<span style="color:var(--success);font-weight:600;">锟?鏈娴嬪埌鏁忔劅璇嶏紝鍐呭鍚堣</span>';
+    detailArea.style.display = 'none';
+  } else {
+    // Highlight matches in text
+    let highlighted = text;
+    const offsets = [];
+    unique.forEach(m => { offsets.push(m.index); });
+    // Work backward to avoid offset shift
+    const sorted = [...unique].sort((a, b) => b.index - a.index);
+    sorted.forEach(m => {
+      const word = text.substr(m.index, m.word.length);
+      highlighted = highlighted.slice(0, m.index) +
+        `<span class="sens-match">${word}</span>` +
+        highlighted.slice(m.index + word.length);
+    });
+    result.innerHTML = highlighted.replace(/\n/g, '<br>');
+
+    // Detail list
+    const cats = {};
+    unique.forEach(m => {
+      if (!cats[m.cat]) cats[m.cat] = [];
+      cats[m.cat].push(m.word);
+    });
+    detail.innerHTML = Object.entries(cats).map(([cat, words]) => {
+      const countMap = {};
+      words.forEach(w => { countMap[w] = (countMap[w] || 0) + 1; });
+      return `<div style="margin-bottom:10px"><strong>${cat}锟?{words.length}澶勶級</strong><br>` +
+        Object.entries(countMap).map(([w, c]) => `<span class="sens-match" style="background:var(--border-light);color:var(--text);font-weight:600;margin:2px 4px 2px 0">${w} 脳${c}</span>`).join('') +
+        `</div>`;
+    }).join('');
+    detailArea.style.display = 'block';
+  }
+  showOutput('outputArea');
+}
+
+function clearAll() {
+  document.getElementById('inputText').value = '';
+  document.getElementById('outputArea').classList.add('hidden');
+  document.getElementById('summaryArea').style.display = 'none';
+}
+</script>
+<script src="/js/animations.js"></script></body>
+</html>
+

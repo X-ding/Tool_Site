@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鍛ㄦ姤鐢熸垚锟?- 鍏嶈垂鍦ㄧ嚎鐢熸垚鍛ㄦ姤</title>
+<meta name="description" content="杈撳叆姣忔棩宸ヤ綔鍐呭锛屼竴閿敓鎴愯鑼冦€佷笓涓氱殑鍛ㄦ姤鏂囩锛屾敮鎸佸绉嶆牸寮忥紝鍏嶈垂鍦ㄧ嚎浣跨敤锟?>
+<meta name="keywords" content="鍛ㄦ姤鐢熸垚锟?鍛ㄦ姤妯℃澘,宸ヤ綔鍛ㄦ姤,鍛ㄦ姤鑼冩枃,鍏嶈垂宸ュ叿">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="header"><div class="header-inner">
+<a href="/" class="header-logo">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+<span>鍦ㄧ嚎宸ュ叿绠?/span>
+</a>
+<nav class="header-nav">
+<a href="/">棣栭〉</a>
+<a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a>
+<a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a>
+<a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a>
+<a href="/tools/screenshot-studio.html">鎴浘缇庡寲</a>
+<a href="/">鍏ㄩ儴宸ュ叿</a>
+</nav>
+</div></header>
+
+<main class="tool-page">
+  <div class="container">
+    <div class="tool-page-header">
+      <a href="/" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        杩斿洖棣栭〉
+      </a>
+      <h1>鍛ㄦ姤鐢熸垚锟?/h1>
+      <p>杈撳叆浣犳瘡澶╃殑宸ヤ綔鍐呭锛岃嚜鍔ㄧ敓鎴愯鑼冦€佹潯鐞嗘竻鏅扮殑鍛ㄦ姤锟?/p>
+    </div>
+
+    <div class="tool-body">
+      <div class="form-group">
+        <label>鏈懆鏃堕棿鑼冨洿</label>
+        <input type="text" id="weekRange" value="2026锟?锟?3锟?- 2026锟?锟?9锟? placeholder="濡傦細2026锟?锟?3锟?- 2026锟?锟?9锟?>
+      </div>
+
+      <div class="form-group">
+        <label>鏄熸湡涓€锟?/13锟?/label>
+        <textarea id="mon" placeholder="杈撳叆鍛ㄤ竴鐨勫伐浣滃唴瀹癸紝姣忚涓€锟?#10;渚嬪锛氬畬鎴愮敤鎴锋ā鍧楁帴鍙ｅ紑锟?#10;淇绾夸笂 bug #1234"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>鏄熸湡浜岋紙7/14锟?/label>
+        <textarea id="tue" placeholder="杈撳叆鍛ㄤ簩鐨勫伐浣滃唴锟?.."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>鏄熸湡涓夛紙7/15锟?/label>
+        <textarea id="wed" placeholder="杈撳叆鍛ㄤ笁鐨勫伐浣滃唴锟?.."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>鏄熸湡鍥涳紙7/16锟?/label>
+        <textarea id="thu" placeholder="杈撳叆鍛ㄥ洓鐨勫伐浣滃唴锟?.."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>鏄熸湡浜旓紙7/17锟?/label>
+        <textarea id="fri" placeholder="杈撳叆鍛ㄤ簲鐨勫伐浣滃唴锟?.."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>涓嬪懆璁″垝锛堥€夊～锟?/label>
+        <textarea id="nextPlan" placeholder="杈撳叆涓嬪懆鐨勫伐浣滆锟?.." style="min-height:80px"></textarea>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="generateReport()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          鐢熸垚鍛ㄦ姤
+        </button>
+        <button class="btn btn-outline" onclick="clearAll()">娓呯┖鍐呭</button>
+      </div>
+
+      <div class="output-area hidden" id="outputArea">
+        <div class="output-label">鍛ㄦ姤棰勮</div>
+        <div class="output-content" id="reportOutput"></div>
+        <button class="copy-btn" data-target="reportOutput">澶嶅埗鍏ㄦ枃</button>
+      </div>
+    </div>
+
+    <div class="ad-placeholder">骞垮憡浣嶆嫑锟?路 鑱旂郴鍚堜綔</div>
+  </div>
+</main>
+
+<footer class="footer"><div class="container">
+<div class="footer-grid">
+<div class="footer-col"><h4>鉁?鍦ㄧ嚎宸ュ叿绠?/h4><p>鍏嶈垂鍦ㄧ嚎宸ュ叿鍚堥泦锛屽寘鍚皝闈㈣璁°€佸崱鐗囧埗浣溿€佸紑鍙戣皟璇曘€佹晥鐜囨彁鍗囩瓑澶氱宸ュ叿锛屾祻瑙堝櫒绔鐞嗭紝鏃犻渶娉ㄥ唽锛屽嵆寮€鍗崇敤銆?/p></div>
+<div class="footer-col"><h4>鍐呭鍒涗綔</h4><a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a><a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a><a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a><a href="/tools/screenshot-studio.html">鎴浘缇庡寲鍣?/a></div>
+<div class="footer-col"><h4>寮€鍙戝伐鍏?/h4><a href="/tools/json-formatter.html">JSON 鏍煎紡鍖?/a><a href="/tools/markdown-converter.html">Markdown 杞崲</a></div>
+<div class="footer-col"><h4>鏁堢巼宸ュ叿</h4><a href="/tools/weekly-report.html">鍛ㄦ姤鐢熸垚鍣?/a><a href="/tools/email-template.html">閭欢妯℃澘</a><a href="/tools/pomodoro.html">鐣寗閽?/a><a href="/tools/todo-manager.html">寰呭姙浜嬮」</a></div>
+</div>
+<div class="footer-bottom"><p>鍦ㄧ嚎宸ュ叿绠?路 鍏嶈垂鍦ㄧ嚎宸ュ叿 路 鏁版嵁鏈湴澶勭悊 路 鏃犻渶娉ㄥ唽</p></div>
+</div></footer>
+
+<script src="/js/main.js"></script>
+<script>
+function getVal(id) { return document.getElementById(id).value.trim(); }
+
+function generateReport() {
+  const range = getVal('weekRange') || '鏈懆';
+  const days = [
+    { label: '鏄熸湡涓€', val: getVal('mon') },
+    { label: '鏄熸湡锟?, val: getVal('tue') },
+    { label: '鏄熸湡锟?, val: getVal('wed') },
+    { label: '鏄熸湡锟?, val: getVal('thu') },
+    { label: '鏄熸湡锟?, val: getVal('fri') },
+  ];
+  const nextPlan = getVal('nextPlan');
+
+  const hasContent = days.some(d => d.val);
+  if (!hasContent) {
+    alert('璇疯嚦灏戣緭鍏ヤ竴澶╃殑宸ヤ綔鍐呭');
+    return;
+  }
+
+  let lines = [];
+  lines.push(`銆愬伐浣滃懆鎶ワ拷?{range}`);
+  lines.push('');
+  lines.push('涓€銆佹湰鍛ㄥ伐浣滃唴锟?);
+  lines.push('');
+
+  days.forEach(d => {
+    if (!d.val) return;
+    const items = d.val.split('\n').filter(s => s.trim());
+    lines.push(d.label + '锟?);
+    items.forEach(item => lines.push('  路 ' + item.trim()));
+    lines.push('');
+  });
+
+  if (nextPlan) {
+    lines.push('浜屻€佷笅鍛ㄨ锟?);
+    lines.push('');
+    nextPlan.split('\n').filter(s => s.trim()).forEach(item => {
+      lines.push('  路 ' + item.trim());
+    });
+    lines.push('');
+  }
+
+  lines.push('涓夈€佹€荤粨');
+  lines.push('');
+  const totalItems = days.reduce((sum, d) => sum + (d.val ? d.val.split('\n').filter(s => s.trim()).length : 0), 0);
+  lines.push(`鏈懆鍏卞畬锟?${totalItems} 椤瑰伐浣滃唴瀹广€俙);
+
+  const out = document.getElementById('reportOutput');
+  out.textContent = lines.join('\n');
+  showOutput('outputArea');
+}
+
+function clearAll() {
+  ['mon','tue','wed','thu','fri','nextPlan'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('outputArea').classList.add('hidden');
+}
+</script>
+<script src="/js/animations.js"></script></body>
+</html>
+

@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鏍囬鐢熸垚锟?- 鍏嶈垂鍦ㄧ嚎鏍囬鐏垫劅宸ュ叿</title>
+<meta name="description" content="杈撳叆涓婚锛屼竴閿敓鎴愬惛寮曚汉鐨勬枃绔犳爣棰樸€佽棰戞爣棰樸€佹枃妗堟爣棰橈紝鏀寔澶氱椋庢牸锟?>
+<meta name="keywords" content="鏍囬鐢熸垚锟?鏂囩珷鏍囬,鏍囬鐏垫劅,鐖嗘鏍囬">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="header"><div class="header-inner">
+<a href="/" class="header-logo">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+<span>鍦ㄧ嚎宸ュ叿绠?/span>
+</a>
+<nav class="header-nav">
+<a href="/">棣栭〉</a>
+<a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a>
+<a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a>
+<a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a>
+<a href="/tools/screenshot-studio.html">鎴浘缇庡寲</a>
+<a href="/">鍏ㄩ儴宸ュ叿</a>
+</nav>
+</div></header>
+<main class="tool-page">
+  <div class="container">
+    <div class="tool-page-header">
+      <a href="/" class="back-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>杩斿洖棣栭〉</a>
+      <h1>鏍囬鐢熸垚锟?/h1>
+      <p>杈撳叆涓婚鍏抽敭璇嶏紝蹇€熺敓鎴愪笉鍚岀被鍨嬬殑鏍囬鐏垫劅锟?/p>
+    </div>
+    <div class="tool-body">
+      <div class="form-group">
+        <label>鏂囩珷涓婚</label>
+        <input type="text" id="topic" placeholder="濡傦細杩滅▼鍔炲叕鏁堢巼銆丳ython鍏ラ棬銆佸仴搴烽ギ锟? value="杩滅▼鍔炲叕鏁堢巼">
+      </div>
+      <div class="form-group">
+        <label>鏍囬椋庢牸</label>
+        <div style="display:flex;flex-wrap:wrap;gap:8px" id="styleSelector">
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" checked value="list"> 鍒楄〃锟?/label>
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" checked value="question"> 鎻愰棶锟?/label>
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" checked value="howto"> 鏁欑▼锟?/label>
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" checked value="comparison"> 瀵规瘮锟?/label>
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" checked value="story"> 鏁呬簨锟?/label>
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="checkbox" checked value="urgent"> 绱ц揩锟?/label>
+        </div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="generateTitles()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          鐢熸垚鏍囬
+        </button>
+      </div>
+      <div class="output-area hidden" id="outputArea">
+        <div class="output-label">鐢熸垚鐨勬爣锟?/div>
+        <div class="output-content" id="titleOutput"></div>
+        <button class="copy-btn" data-target="titleOutput">澶嶅埗鍏ㄩ儴</button>
+      </div>
+    </div>
+    <div class="ad-placeholder">骞垮憡浣嶆嫑锟?路 鑱旂郴鍚堜綔</div>
+  </div>
+</main>
+<footer class="footer"><div class="container">
+<div class="footer-grid">
+<div class="footer-col"><h4>鉁?鍦ㄧ嚎宸ュ叿绠?/h4><p>鍏嶈垂鍦ㄧ嚎宸ュ叿鍚堥泦锛屽寘鍚皝闈㈣璁°€佸崱鐗囧埗浣溿€佸紑鍙戣皟璇曘€佹晥鐜囨彁鍗囩瓑澶氱宸ュ叿锛屾祻瑙堝櫒绔鐞嗭紝鏃犻渶娉ㄥ唽锛屽嵆寮€鍗崇敤銆?/p></div>
+<div class="footer-col"><h4>鍐呭鍒涗綔</h4><a href="/tools/cover-studio.html">灏侀潰宸ュ潑</a><a href="/tools/quote-studio.html">鍗＄墖宸ュ潑</a><a href="/tools/collage-studio.html">鎷煎浘宸ュ潑</a><a href="/tools/screenshot-studio.html">鎴浘缇庡寲鍣?/a></div>
+<div class="footer-col"><h4>寮€鍙戝伐鍏?/h4><a href="/tools/json-formatter.html">JSON 鏍煎紡鍖?/a><a href="/tools/markdown-converter.html">Markdown 杞崲</a></div>
+<div class="footer-col"><h4>鏁堢巼宸ュ叿</h4><a href="/tools/weekly-report.html">鍛ㄦ姤鐢熸垚鍣?/a><a href="/tools/email-template.html">閭欢妯℃澘</a><a href="/tools/pomodoro.html">鐣寗閽?/a><a href="/tools/todo-manager.html">寰呭姙浜嬮」</a></div>
+</div>
+<div class="footer-bottom"><p>鍦ㄧ嚎宸ュ叿绠?路 鍏嶈垂鍦ㄧ嚎宸ュ叿 路 鏁版嵁鏈湴澶勭悊 路 鏃犻渶娉ㄥ唽</p></div>
+</div></footer>
+<script src="/js/main.js"></script>
+<script>
+const titleTemplates = {
+  list: (t) => [
+    `${t}锟?0涓綘蹇呴』鐭ラ亾鐨勬柟娉昤,
+    `5涓浣犳剰鎯充笉鍒扮殑${t}鎶€宸,
+    `${t}锟?涓父瑙佽鍖猴紝浣犱腑浜嗗嚑涓紵`,
+    `Top 10 ${t}宸ュ叿鎺ㄨ崘锟?026鏈€鏂帮級`,
+    `${t}蹇呭锟?涓祫婧愭竻鍗昤,
+    `3涓楠わ紝杞绘澗鎺屾彙${t}`,
+    `${t}楂樻墜閮藉湪鐢ㄧ殑6涓璇€`,
+    `涓€鏂囨€荤粨${t}鐨勬牳蹇冭鐐癸紙锟?2鏉★級`
+  ],
+  question: (t) => [
+    `涓轰粈涔堜綘锟?{t}鎬绘槸鍋氫笉濂斤紵`,
+    `${t}鍒板簳璇ユ€庝箞瀛︼紵浠庨浂寮€濮嬪畬鏁存寚鍗梎,
+    `浣犵湡鐨勪簡锟?{t}鍚楋紵10涓父瑙侀棶棰樿В绛擿,
+    `濡備綍锟?{t}鎻愬崌宸ヤ綔鏁堢巼锛焋,
+    `${t}鍊煎緱鎶曞叆鍚楋紵娣卞害鍒嗘瀽`,
+    `涓轰粈涔堥珮鎵嬮兘鍦ㄨ皥${t}锛焋,
+    `浣犵殑${t}鏂规硶瀵逛簡鍚楋紵鏉ユ娴嬩竴涓媊,
+    `${t}鐨勬湭鏉ヤ細鎬庢牱锛熻秼鍔胯В璇籤
+  ],
+  howto: (t) => [
+    `鎵嬫妸鎵嬫暀浣犲叆锟?{t}锛屼粠闆跺埌涓婃墜`,
+    `${t}瀹屾暣鏁欑▼锛氱湅杩欎竴绡囧氨澶熶簡`,
+    `鏂版墜蹇呯湅锟?{t}瀹屽叏鎿嶄綔鎸囧崡`,
+    `濡備綍锟?{t}瀹炵幇鏁堢巼缈诲€嶏紵`,
+    `涓€姝ユ鏁欎綘鎼缓${t}浣撶郴`,
+    `${t}瀹炴垬鏁欑▼锛氫粠鐞嗚鍒拌惤鍦癭,
+    `闆跺熀纭€涔熻兘瀛︿細锟?{t}鏂规硶`,
+    `${t}瓒呰缁嗘楠よВ鏋恅
+  ],
+  comparison: (t) => [
+    `${t}A vs B锛氬摢涓洿閫傚悎浣狅紵`,
+    `2026锟?{t}宸ュ叿妯悜瀵规瘮璇勬祴`,
+    `${t}锟?绉嶄富娴佹柟妗堬紝浼樼己鐐瑰垎鏋恅,
+    `鍏嶈垂 vs 浠樿垂锟?{t}宸ュ叿鎬庝箞閫夛紵`,
+    `绾夸笂 vs 绾夸笅锟?{t}鏂瑰紡澶K`,
+    `${t}鏂版棫鏂规硶瀵规瘮锛岀粨鏋滃嚭涔庢剰鏂檂,
+    `瀹炴垬瀵规瘮锟?娆句富锟?{t}宸ュ叿娴嬭瘎`,
+    `涓嶅悓鍦烘櫙锟?{t}鏂规鎬庝箞閫夛紵`
+  ],
+  story: (t) => [
+    `浠庡叆闂ㄥ埌绮鹃€氾紝鎴戠殑${t}涔嬭矾`,
+    `鐢ㄤ簡${t}涔嬪悗锛屾垜鐨勭敓娲诲彂鐢熶簡杩欎簺鍙樺寲`,
+    `鍥犱负涓嶆噦${t}锛屾垜璧颁簡3骞村集璺痐,
+    `涓€涓櫘閫氫汉鏄浣曢潬${t}閫嗚鐨刞,
+    `${t}鏀瑰彉浜嗘垜鐨勪汉鐢焋,
+    `鎴戠殑${t}韪╁潙瀹炲綍锛屽缓璁敹钘廯,
+    `鍧氭寔${t}涓€骞村悗锛屾垜鐪嬪埌浜嗚繖浜涘彉鍖朻,
+    `绂昏亴鍚庢垜鎵嶆槑锟?{t}鏈夊閲嶈`
+  ],
+  urgent: (t) => [
+    `绱ф€ユ彁閱掞細${t}鐨勮繖鍑犱釜鍧戝崈涓囧埆韪ー,
+    `鍐嶄笉鐭ラ亾${t}灏辨櫄浜嗭紒`,
+    `鍒啀杩欐牱${t}浜嗭紝90%鐨勪汉閮藉仛閿欎簡`,
+    `${t}蹇呯湅锛侀敊杩囪繖绡囨枃绔犳崯澶卞ぇ浜哷,
+    `閲嶈閫氱煡锟?{t}瑙勫垯鍙樹簡锛乣,
+    `鏈€锟?澶╋紒${t}闄愭椂绂忓埄`,
+    `${t}鐨勮嚧鍛借鍖猴紝鐜板湪鐭ラ亾杩樹笉鏅歚,
+    `绱ф€ワ紒鍏充簬${t}浣犱竴瀹氳鐭ラ亾鐨勭湡鐩竊
+  ]
+};
+
+function generateTitles() {
+  const topic = document.getElementById('topic').value.trim();
+  if (!topic) { alert('璇疯緭鍏ヤ富锟?); return; }
+  const checks = document.querySelectorAll('#styleSelector input:checked');
+  if (checks.length === 0) { alert('璇疯嚦灏戦€夋嫨涓€绉嶉锟?); return; }
+
+  const lines = [];
+  checks.forEach(cb => {
+    const style = cb.value;
+    const styleNames = { list: '鍒楄〃锟?, question: '鎻愰棶锟?, howto: '鏁欑▼锟?, comparison: '瀵规瘮锟?, story: '鏁呬簨锟?, urgent: '绱ц揩锟? };
+    lines.push('');
+    lines.push(`锟?{styleNames[style]}銆慲);
+    titleTemplates[style](topic).forEach(t => lines.push('  路 ' + t));
+  });
+
+  const out = document.getElementById('titleOutput');
+  out.textContent = `涓婚锟?{topic}\n${lines.join('\n')}`;
+  showOutput('outputArea');
+}
+</script>
+<script src="/js/animations.js"></script></body>
+</html>
+
